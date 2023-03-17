@@ -44,3 +44,12 @@ jupyter nbextension enable toc2/main
 jupyter notebook
 ```
 
+## 4. 
+
+params.yaml >> Define os parâmetros usados;
+
+dvc.yaml >> Define as pipelines e suas dependências. Cada estágio possui no mínimo uma dependência, que é a própria fase;
+
+Reproduzir E2E ML pipelines >> dvc repro; dvc exp run
+
+
