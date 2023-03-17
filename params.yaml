@@ -4,7 +4,7 @@ base:
 
 data_load:
   dataset_csv: data/raw/iris.csv
-  random_state: 41
+  random_state: 48
 
 featurize:
   features_path: data/processed/featured_iris.csv
