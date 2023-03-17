@@ -13,16 +13,16 @@ stages:
           log_level: INFO
         data_load:
           dataset_csv: data/raw/iris.csv
-          random_state: 789456
+          random_state: 41
     outs:
     - path: data/raw/iris.csv
-      md5: 37e8ec196a7aaec78f8eb4485def35f1
+      md5: cb918e0389c21394128b168475ba4113
       size: 2757
   featurize:
     cmd: python src/stages/featurize.py --config=params.yaml
     deps:
     - path: data/raw/iris.csv
-      md5: 37e8ec196a7aaec78f8eb4485def35f1
+      md5: cb918e0389c21394128b168475ba4113
       size: 2757
     - path: src/stages/featurize.py
       md5: fa1ec29f6ff564a3e3d305aea118be81
@@ -34,19 +34,19 @@ stages:
           log_level: INFO
         data_load:
           dataset_csv: data/raw/iris.csv
-          random_state: 789456
+          random_state: 41
         featurize:
           features_path: data/processed/featured_iris.csv
           target_column: target
     outs:
     - path: data/processed/featured_iris.csv
-      md5: 5ab2105a7fac5cd484949884acc1e1c8
+      md5: 7194a51baea5259a21406a947e9cdabd
       size: 7260
   data_split:
     cmd: python src/stages/data_split.py --config=params.yaml
     deps:
     - path: data/processed/featured_iris.csv
-      md5: 5ab2105a7fac5cd484949884acc1e1c8
+      md5: 7194a51baea5259a21406a947e9cdabd
       size: 7260
     - path: src/stages/data_split.py
       md5: 8dfe312ff90160af2ff57f15ac8cb829
@@ -65,17 +65,17 @@ stages:
           target_column: target
     outs:
     - path: data/processed/test_iris.csv
-      md5: fa907e5d78e1400eb46361d3b139aa02
-      size: 1494
+      md5: e7016bc0caaf18074e9d9af3bbfac648
+      size: 1574
     - path: data/processed/train_iris.csv
-      md5: 3fac88dabaadefe4b3d2f9f2a40dfaf8
-      size: 5722
+      md5: a99a256c2bc4f26b24cb9708067172b2
+      size: 5642
   train:
     cmd: python src/stages/train.py --config=params.yaml
     deps:
     - path: data/processed/train_iris.csv
-      md5: 3fac88dabaadefe4b3d2f9f2a40dfaf8
-      size: 5722
+      md5: a99a256c2bc4f26b24cb9708067172b2
+      size: 5642
     - path: src/stages/train.py
       md5: 0f01f271bc8169c69ce724f19eacde07
       size: 1371
@@ -116,16 +116,16 @@ stages:
           model_path: models/model.joblib
     outs:
     - path: models/model.joblib
-      md5: 2ea18d4819f7954409c7c1bbe2728ea0
+      md5: 50bfd465ac6aaf691ae8852700c3429e
       size: 2669
   evaluate:
     cmd: python src/stages/evaluate.py --config=params.yaml
     deps:
     - path: data/processed/test_iris.csv
-      md5: fa907e5d78e1400eb46361d3b139aa02
-      size: 1494
+      md5: e7016bc0caaf18074e9d9af3bbfac648
+      size: 1574
     - path: models/model.joblib
-      md5: 2ea18d4819f7954409c7c1bbe2728ea0
+      md5: 50bfd465ac6aaf691ae8852700c3429e
       size: 2669
     - path: src/stages/evaluate.py
       md5: 5589d607ffe0a7e4d82084b7377c9c78
@@ -144,11 +144,11 @@ stages:
         featurize.target_column: target
     outs:
     - path: reports/confusion_matrix.png
-      md5: 1b9f1f9dcebcb03ed21ffe4970f825ed
-      size: 24793
+      md5: a66e74a737ff29af6ead54677d72a55c
+      size: 25090
     - path: reports/confusion_matrix_data.csv
-      md5: 767c4027866b6b504f642c51ee4778b9
-      size: 573
+      md5: 0a6287959ef6e86d1dea1ec4b370fc76
+      size: 559
     - path: reports/metrics.json
       md5: 3329ba1a6b18407f725a1e25a5500560
       size: 17
